@@ -1,0 +1,23 @@
+;;; Professor Bailey
+
+include cs240.inc
+
+
+DOSEXIT = 4C00h
+DOS = 21h
+
+.8086
+
+.data
+
+	;; Place data definitions here
+
+.code
+
+main PROC
+
+
+main ENDP
+
+
+end main
