@@ -1,0 +1,111 @@
+Microsoft (R) Macro Assembler Version 6.11		    01/25/23 14:14:10
+demo.asm						     Page 1 - 1
+
+
+				;;; Professor Bailey
+				;;; Spring 2023
+				
+				include cs240.inc		; Include CS 240 library definitions
+			      C .NOLIST
+			      C .LIST
+			      C 
+					
+				;;; Standard DOS definitions
+				
+ = 4C00				DOSEXIT = 4C00h
+ = 0021				DOS = 21h
+				
+				.8086
+				
+ 0000				.data
+					
+ 0000				.code
+				
+ 0000				tolower PROC
+					;; DL - the value to be converted
+					;; Returns: the lowercase value in DL
+				
+ 0000  9C				pushf
+ 0001  80 FA 41				cmp	dl, 'A'
+ 0004  72 08				jb	outside
+ 0006  80 FA 5A				cmp	dl, 'Z'
+ 0009  77 03				ja	outside
+ 000B  80 C2 20				add	dl, 'a' - 'A'
+ 000E				outside:
+					
+ 000E  9D				popf
+ 000F  C3				ret
+ 0010				tolower ENDP
+				
+				END
+Microsoft (R) Macro Assembler Version 6.11		    01/25/23 14:14:10
+demo.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0200	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0010	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+DumpLongRegs . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+DumpMem  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+DumpRegs . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+GetMseconds  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+NewLine  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+PrintVersion . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Random32 . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+RandomRange  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Randomize  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadChar . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexByte  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexDigit . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexDoubleWord  . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexWord  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadInt  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadLine . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadUInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+SkipToEOL  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Version  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteBit . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteCSString  . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteChar  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexByte . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexDigit  . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexDoubleWord . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexWord . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteString  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteUInt  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+tolower  . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0010 Public C
+  outside  . . . . . . . . . . .	L Near	 000E	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0001h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+DOSEXIT  . . . . . . . . . . . .	Number	 4C00h	 
+DOS  . . . . . . . . . . . . . .	Number	 0021h	 
+
+	   0 Warnings
+	   0 Errors
