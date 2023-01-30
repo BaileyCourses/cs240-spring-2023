@@ -1,0 +1,120 @@
+Microsoft (R) Macro Assembler Version 6.11		    01/30/23 13:40:36
+fri.asm							     Page 1 - 1
+
+
+				;;; Professor Bailey
+				;;; Spring 2023
+				
+				include cs240.inc
+			      C .NOLIST
+			      C .LIST
+			      C 
+					
+ = 4C00				DOSEXIT = 4C00h
+ = 0021				DOS = 21h
+				
+				.8086
+				
+ 0000				.data
+					
+ 0000 0A 22			bytes	BYTE	10, 34
+ 0002 1234 ABCD 1098		values	WORD	1234h, 0ABCDh, 1098h
+ 0008 48 61 6D 69 6C 74		motto	BYTE	"Hamilton rocks the DOSBox", 0
+       6F 6E 20 72 6F 63
+       6B 73 20 74 68 65
+       20 44 4F 53 42 6F
+       78 00
+				
+ 0000				.code
+				
+				;;; Entry point for the program
+				
+ 0000				main PROC
+ 0000  B8 ---- R			mov	ax, @data	; Setup the data segment
+ 0003  8E D8				mov	ds, ax
+				
+					;; Start of DOS program...
+				
+ 0005  8B 16 FFF8 R			mov	dx, values - 10
+ 0009  E8 0000 E			call	DumpRegs
+				;	call	WriteChar
+				;	mov	dl, dh
+				;	call	WriteChar
+				
+ 000C  B8 4C00				mov	ax, DOSEXIT	; Signal DOS that we are done
+ 000F  CD 21				int	DOS
+ 0011				main ENDP
+				END main
+Microsoft (R) Macro Assembler Version 6.11		    01/30/23 13:40:36
+fri.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0022	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0200	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0011	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+DumpLongRegs . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+DumpMem  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+DumpRegs . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+GetMseconds  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+NewLine  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+PrintVersion . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Random32 . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+RandomRange  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Randomize  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadChar . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexByte  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexDigit . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexDoubleWord  . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexWord  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadInt  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadLine . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadUInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+SkipToEOL  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Version  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteBit . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteCSString  . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteChar  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexByte . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexDigit  . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexDoubleWord . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexWord . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteString  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteUInt  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+main . . . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0011 Public C
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0001h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+DOSEXIT  . . . . . . . . . . . .	Number	 4C00h	 
+DOS  . . . . . . . . . . . . . .	Number	 0021h	 
+bytes  . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+motto  . . . . . . . . . . . . .	Byte	 0008	  _DATA	
+values . . . . . . . . . . . . .	Word	 0002	  _DATA	
+
+	   0 Warnings
+	   0 Errors
