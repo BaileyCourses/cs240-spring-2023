@@ -1,0 +1,175 @@
+Microsoft (R) Macro Assembler Version 6.11		    02/03/23 13:55:14
+demo.asm						     Page 1 - 1
+
+
+				;;; Professor Bailey
+				;;; Spring 2023
+				
+				include cs240.inc
+			      C .NOLIST
+			      C .LIST
+			      C 
+					
+ = 4C00				DOSEXIT = 4C00h
+ = 0021				DOS = 21h
+				
+				.8086
+				
+ 0000				.data
+					
+ 0000 0000			wide	WORD	0
+ 0002 0000			height	WORD	0
+ 0000				.code
+				
+				
+ 0000				doit PROC
+					;; AX = height of box
+					;; DX = width of box
+				
+ 0000  89 16 0000 R			mov	wide, dx
+ 0004  A3 0002 R			mov	height, ax
+				
+ 0007  B2 2B				mov	dl, '+'
+ 0009  E8 0000 E			call	WriteChar
+				
+ 000C  8B 0E 0000 R			mov	cx, wide
+ 0010				bartop:	
+ 0010  B2 2D				mov	dl, '-'
+ 0012  E8 0000 E			call	WriteChar
+ 0015  E2 F9				loop	bartop
+				
+ 0017  B2 2B				mov	dl, '+'
+ 0019  E8 0000 E			call	WriteChar
+ 001C  E8 0000 E			call	NewLine
+				
+				
+ 001F  8B 0E 0002 R			mov	cx, height
+ 0023				topp:	
+ 0023  B2 7C				mov	dl, '|'
+ 0025  E8 0000 E			call	WriteChar
+				
+ 0028  51				push	cx
+ 0029  8B 0E 0000 R			mov	cx, wide
+ 002D				top:	
+ 002D  B2 20				mov	dl, ' '
+ 002F  E8 0000 E			call	WriteChar
+ 0032  E2 F9				loop	top
+				
+ 0034  59				pop	cx
+				
+ 0035  B2 7C				mov	dl, '|'
+ 0037  E8 0000 E			call	WriteChar
+ 003A  E8 0000 E			call	NewLine
+				
+ 003D  E2 E4				loop	topp
+				
+ 003F  B2 2B				mov	dl, '+'
+ 0041  E8 0000 E			call	WriteChar
+				
+ 0044  8B 0E 0000 R			mov	cx, wide
+ 0048				barbottom:	
+ 0048  B2 2D				mov	dl, '-'
+ 004A  E8 0000 E			call	WriteChar
+ 004D  E2 F9				loop	barbottom
+				
+ 004F  B2 2B				mov	dl, '+'
+ 0051  E8 0000 E			call	WriteChar
+ 0054  E8 0000 E			call	NewLine
+				
+				
+ 0057  C3				ret
+ 0058				doit ENDP
+				
+				;;; Entry point for the program
+				
+ 0058				main PROC
+ 0058  B8 ---- R			mov	ax, @data	; Setup the data segment
+ 005B  8E D8				mov	ds, ax
+				
+					;; Start of DOS program...
+				
+ 005D  B8 0003				mov	ax, 3
+ 0060  BA 000A				mov	dx, 10
+ 0063  E8 FF9A				call	doit
+				
+ 0066  B8 4C00				mov	ax, DOSEXIT	; Signal DOS that we are done
+ 0069  CD 21				int	DOS
+ 006B				main ENDP
+				END main
+Microsoft (R) Macro Assembler Version 6.11		    02/03/23 13:55:14
+demo.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0004	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0200	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 006B	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+DumpLongRegs . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+DumpMem  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+DumpRegs . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+GetMseconds  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+NewLine  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+PrintVersion . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Random32 . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+RandomRange  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Randomize  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadChar . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexByte  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexDigit . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexDoubleWord  . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadHexWord  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadInt  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadLine . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+ReadUInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+SkipToEOL  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+Version  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteBit . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteCSString  . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteChar  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexByte . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexDigit  . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexDoubleWord . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteHexWord . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteString  . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+WriteUInt  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External C
+doit . . . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0058 Public C
+  bartop . . . . . . . . . . . .	L Near	 0010	  _TEXT	
+  topp . . . . . . . . . . . . .	L Near	 0023	  _TEXT	
+  top  . . . . . . . . . . . . .	L Near	 002D	  _TEXT	
+  barbottom  . . . . . . . . . .	L Near	 0048	  _TEXT	
+main . . . . . . . . . . . . . .	P Near	 0058	  _TEXT	Length= 0013 Public C
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0001h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+DOSEXIT  . . . . . . . . . . . .	Number	 4C00h	 
+DOS  . . . . . . . . . . . . . .	Number	 0021h	 
+height . . . . . . . . . . . . .	Word	 0002	  _DATA	
+wide . . . . . . . . . . . . . .	Word	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors
